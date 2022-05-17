@@ -5,10 +5,9 @@ var pozX = 0, pozY = 0;
 var scores = new Array(0);
 
 function move(x_pos, y_pos) {
-    var d = document.getElementById('ball');
-    d.style.position = "absolute";
-    d.style.left = x_pos+'px';
-    d.style.top = y_pos+'px';
+    ball.style.position = "absolute";
+    ball.style.left = x_pos+'px';
+    ball.style.top = y_pos+'px';
   }
 
 function startMoving() {
@@ -29,23 +28,24 @@ function startGame() {
     score = 0;
     scoreCalculator = setInterval(computeScore, 250);
     mover = setInterval(startMoving, 100);
+    document.getElementById("start").style.display = "none";
 }
 
 function endGame() {
     clearInterval(scoreCalculator);
     clearInterval(mover);
-    document.getElementById("ball").style.backgroundColor = "red";
+    ball.style.backgroundColor = "red";
 
     let max = Math.max.apply(null, scores);
     let message;
     if(score > max)
-        message = "high score: " + score;
+        message = "<span style=\" color: darkorchid; \"> new highscore: " + score + "</span>";
     else
-        message = "score: " + score;
+        message = "score: " + score + "<span style=\" color: darkorchid; \"> | highscore: " + max + "</span>";
 
-    document.getElementById("score").textContent = message;
+    document.getElementById("score").innerHTML = message;
     scores.push(score);
-    console.log(scores + " - " + max);
+    document.getElementById("start").style.display = "block";
 }
 
 (function() {
