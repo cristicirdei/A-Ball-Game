@@ -8,8 +8,7 @@
     position: absolute;
     left: 750px;
     top: 150px;
-    transition: left 2s;
-    transition: top 2s;
+    transition: left 1s linear, top 1s linear;
 }
 
 h1, h2, h3 {

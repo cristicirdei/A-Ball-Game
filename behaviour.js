@@ -6,8 +6,22 @@ var scores = new Array(0);
 
 function move(x_pos, y_pos) {
     ball.style.position = "absolute";
-    ball.style.left = x_pos+'px';
-    ball.style.top = y_pos+'px';
+
+    if(Math.abs(x_pos - ball.style.left) > Math.abs(y_pos - ball.style.top) + 20) {
+        ball.style.removeProperty("transition");
+        ball.style.transition = "left .5s linear, top 1s linear";
+    } else {
+        if(Math.abs(x_pos - ball.style.left) + 20 < Math.abs(y_pos - ball.style.top)) {
+            ball.style.removeProperty("transition");
+            ball.style.transition = "left 1s linear, top .5s linear";
+        } else {
+            ball.style.removeProperty("transition");
+            ball.style.transition = "left .5s linear, top 1s linear";
+        }
+    }
+
+    ball.style.left = (x_pos - 10) + 'px';
+    ball.style.top = (y_pos - 10) + 'px';
   }
 
 function startMoving() {
@@ -23,8 +37,8 @@ function computeScore() {
 
 function startGame() {
     ball.style.backgroundColor = "greenyellow";
-    ball.style.left = 750;
-    ball.style.top = 150;
+    ball.style.left = "750px";
+    ball.style.top = "150px";
     score = 0;
     scoreCalculator = setInterval(computeScore, 250);
     mover = setInterval(startMoving, 100);
@@ -41,7 +55,7 @@ function endGame() {
     if(score > max)
         message = "<span style=\" color: darkorchid; \"> new highscore: " + score + "</span>";
     else
-        message = "score: " + score + "<span style=\" color: darkorchid; \"> | highscore: " + max + "</span>";
+        message = "score: " + score + " | <span style=\" color: darkorchid; \"> highscore: " + max + "</span>";
 
     document.getElementById("score").innerHTML = message;
     scores.push(score);
