@@ -74,8 +74,6 @@ function endGame() {
             event.pageY = event.clientY + doc.scrollTop - doc.clientTop;
         }
 
-        // Use event.pageX / event.pageY here
-        console.log("X: " + event.pageX + ", Y: " + event.pageY);
         pozX = event.pageX;
         pozY = event.pageY;
     }
