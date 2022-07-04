@@ -64,8 +64,9 @@ function endGame() {
 
 (function() {
     document.onmousemove = handleMouseMove;
-    function handleMouseMove(event) {
-        var doc;
+    document.ontouchmove = handleMouseMove;
+    function handleMouseMove(e) {
+        /*var doc;
 
         if (event.pageX == null && event.clientX != null) {
             doc = document.documentElement;
@@ -75,9 +76,21 @@ function endGame() {
         }
 
         pozX = event.pageX;
-        pozY = event.pageY;
+        pozY = event.pageY;*/
+
+        if(e.type == 'touchstart' || e.type == 'touchmove' || e.type == 'touchend' || e.type == 'touchcancel'){
+            var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+            pozX = touch.pageX;
+            pozY = touch.pageY;
+        } else if (e.type == 'mousedown' || e.type == 'mouseup' || e.type == 'mousemove' || e.type == 'mouseover'|| e.type=='mouseout' || e.type=='mouseenter' || e.type=='mouseleave') {
+            pozX = e.clientX;
+            pozY = e.clientY;
+        }
+
     }
 })();
 
 ball.addEventListener("mouseover", endGame);
+ball.addEventListener("touchstart", endGame);
 document.addEventListener("click", startGame);
+document.addEventListener("touchstart", startGame);

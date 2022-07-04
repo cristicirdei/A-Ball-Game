@@ -6,7 +6,7 @@
     margin: auto;
 
     position: absolute;
-    left: 750px;
+    left: 50%;
     top: 150px;
     transition: left 1s linear, top 1s linear;
 }
